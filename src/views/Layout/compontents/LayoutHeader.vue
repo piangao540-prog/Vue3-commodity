@@ -1,6 +1,20 @@
 <script setup>
 // import LayoutHeaderUl from './LayoutHeaderUl.vue'
 // import HeaderCart from './HeaderCart.vue'
+import { onMounted ,ref} from 'vue';
+import { getHeaderNavApi } from '@/aips/getHeaderNav';
+
+const headerNavList = ref([])
+const getHeaderNav = ()=>{
+  getHeaderNavApi().then(res=>{
+    headerNavList.value = res.data.result
+  })
+}
+
+onMounted(()=>{
+  getHeaderNav()
+})
+
 </script>
 
 <template>
@@ -10,7 +24,11 @@
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
 
-      <LayoutHeaderUl />
+      <ul class="app-header-nav">
+        <li class="home" v-for="item in headerNavList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
+        </li>
+      </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜">
