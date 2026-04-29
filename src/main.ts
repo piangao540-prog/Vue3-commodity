@@ -6,11 +6,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-// 测试接口
-import { getCount } from "@/aips/testApi";
-getCount().then(res => {
-    console.log(res)
-})
+
 
 const app = createApp(App)
 
