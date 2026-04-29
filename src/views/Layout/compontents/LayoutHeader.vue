@@ -3,17 +3,10 @@
 // import HeaderCart from './HeaderCart.vue'
 import { onMounted ,ref} from 'vue';
 import { getHeaderNavApi } from '@/aips/getHeaderNav';
+import { usecategroyStore } from '@/stores/categroy';
 
-const headerNavList = ref([])
-const getHeaderNav = ()=>{
-  getHeaderNavApi().then(res=>{
-    headerNavList.value = res.data.result
-  })
-}
+const categoryStore = usecategroyStore();
 
-onMounted(()=>{
-  getHeaderNav()
-})
 
 </script>
 
@@ -25,7 +18,10 @@ onMounted(()=>{
       </h1>
 
       <ul class="app-header-nav">
-        <li class="home" v-for="item in headerNavList" :key="item.id">
+        <li class="home">
+          <RouterLink to="/">首页</RouterLink>
+        </li>
+        <li class="home" v-for="item in categoryStore.headerNavList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
@@ -108,6 +104,36 @@ onMounted(()=>{
         border-radius: 10px;
         font-family: Arial;
       }
+    }
+  }
+}
+.app-header-nav {
+  width: 820px;
+  display: flex;
+  padding-left: 40px;
+  position: relative;
+  z-index: 998;
+
+  li {
+    margin-right: 40px;
+    width: 38px;
+    text-align: center;
+
+    a {
+      font-size: 16px;
+      line-height: 32px;
+      height: 32px;
+      display: inline-block;
+
+      &:hover {
+        color: $xtxColor;
+        border-bottom: 1px solid $xtxColor;
+      }
+    }
+
+    .active {
+      color: $xtxColor;
+      border-bottom: 1px solid $xtxColor;
     }
   }
 }
