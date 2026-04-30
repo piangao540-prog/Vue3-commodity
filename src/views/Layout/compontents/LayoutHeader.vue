@@ -1,8 +1,8 @@
 <script setup>
 // import LayoutHeaderUl from './LayoutHeaderUl.vue'
 // import HeaderCart from './HeaderCart.vue'
-import { onMounted ,ref} from 'vue';
-import { getHeaderNavApi } from '@/aips/getHeaderNav';
+// import { onMounted ,ref} from 'vue';
+// import { getHeaderNavApi } from '@/apis/getHeaderNav';
 import { usecategroyStore } from '@/stores/categroy';
 
 const categoryStore = usecategroyStore();
