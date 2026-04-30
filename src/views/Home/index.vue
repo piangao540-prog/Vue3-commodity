@@ -13,16 +13,7 @@ import HomePanel from './components/HomePanel.vue'
     <HomeBanner />
   </div>
   <!-- 测试 -->
-  <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
-    <div>
-      主题内容
-    </div>
-  </HomePanel>
-    <HomePanel title="人气好物" subTitle="新鲜好吃 人气爆款">
-    <div>
-      主要内容
-    </div>
-  </HomePanel>
+  <HomePanel />
   <HomeNew />
   <HomeHot />
   <homeProduct />

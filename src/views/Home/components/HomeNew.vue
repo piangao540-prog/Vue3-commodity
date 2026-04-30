@@ -1,17 +1,20 @@
 <script setup>
-import { findNewAPI } from '@/aips/getHome'
+import { findNewAPI} from '@/aips/getHome'
 import { onMounted, ref } from 'vue'
 import HomePanel from './HomePanel.vue'
 
 const newList = ref([])
+
 
 const getNewList = async () =>{
     const res = await findNewAPI()
     newList.value = res.data.result
 }
 
+
 onMounted(()=>{
     getNewList()
+
 })
 </script>
 
@@ -27,17 +30,28 @@ onMounted(()=>{
         </li>
     </ul>
     </HomePanel>
-  <!-- 下面是插槽主体内容模版
-  <ul class="goods-list">
-    <li v-for="item in newList" :key="item.id">
-      <RouterLink to="/">
-        <img :src="item.picture" alt="" />
-        <p class="name">{{ item.name }}</p>
-        <p class="price">&yen;{{ item.price }}</p>
-      </RouterLink>
-    </li>
-  </ul>
-  -->
+    <!-- <HomePanel title="人气好物" subTitle="人气好物，值得拥有">
+    <ul class="goods-list">
+        <li v-for="item in hotList" :key="item.id">
+        <RouterLink to="/">
+            <img :src="item.picture" alt="" />
+            <p class="name">{{ item.name }}</p>
+            <p class="price">&yen;{{ item.price }}</p>
+        </RouterLink>
+        </li>
+    </ul>
+    </HomePanel>
+    <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
+    <ul class="goods-list">
+        <li v-for="item in goodsList" :key="item.id">
+        <RouterLink to="/">
+            <img :src="item.picture" alt="" />
+            <p class="name">{{ item.name }}</p>
+            <p class="price">&yen;{{ item.price }}</p>
+        </RouterLink>
+        </li>   
+    </ul>
+    </HomePanel> -->
 </template>
 
 
