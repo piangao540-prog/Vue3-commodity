@@ -1,5 +1,5 @@
 <script setup>
-import { getBanner } from '@/aips/getBanner'
+import { getBanner } from '@/aips/getHome'
 import { ref ,onMounted} from 'vue'
 
 const bannerList = ref([])
