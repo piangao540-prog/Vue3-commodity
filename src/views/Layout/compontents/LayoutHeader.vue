@@ -1,8 +1,5 @@
 <script setup>
-// import LayoutHeaderUl from './LayoutHeaderUl.vue'
-// import HeaderCart from './HeaderCart.vue'
-// import { onMounted ,ref} from 'vue';
-// import { getHeaderNavApi } from '@/apis/getHeaderNav';
+
 import { usecategroyStore } from '@/stores/categroy';
 
 const categoryStore = usecategroyStore();
@@ -18,9 +15,9 @@ const categoryStore = usecategroyStore();
       </h1>
 
       <ul class="app-header-nav">
-        <li class="home">
+        <!-- <li class="home">
           <RouterLink to="/">首页</RouterLink>
-        </li>
+        </li> -->
         <li class="home" v-for="item in categoryStore.headerNavList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
@@ -30,7 +27,6 @@ const categoryStore = usecategroyStore();
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
-      <HeaderCart />
     </div>
 </header>
 </template>

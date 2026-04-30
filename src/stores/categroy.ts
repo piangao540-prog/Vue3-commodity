@@ -1,6 +1,6 @@
 import { ref, } from 'vue'
 import { defineStore } from 'pinia'
-import { getHeaderNavApi } from '@/aips/getHeaderNav';
+import { getHeaderNavApi } from '@/apis/getHeaderNav';
 
 export const usecategroyStore = defineStore('category', () => {
     // state数据
