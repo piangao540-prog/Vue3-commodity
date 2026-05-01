@@ -1,5 +1,4 @@
 <script setup>
-import { de } from 'element-plus/es/locale/index.mjs';
 defineProps({
     good:{
         type:Object,
@@ -15,7 +14,7 @@ defineProps({
     <p class="name ellipsis">{{ good.name }}</p>
     <p class="desc ellipsis">{{ good.desc }}</p>
     <p class="price">&yen;{{ good.price }}</p>
-</RouterLink>
+    </RouterLink>
 </template>
 
 <style scoped lang="scss">
