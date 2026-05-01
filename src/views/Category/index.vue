@@ -4,13 +4,20 @@ import { onMounted, ref } from "vue"
 import {useRoute} from 'vue-router'
 import { getBanner } from "@/apis/getHome"
 import GoodsItem from "@/views/Home/components/GoodsItem.vue"
+import { onBeforeRouteUpdate } from "vue-router"
 
 const category = ref({})
 const route = useRoute()
-const getcategroy = async()=>{
-    const res = await getCategroyAPI(route.params.id)
+const getcategroy = async(id = route.params.id)=>{
+    const res = await getCategroyAPI(id)
     category.value = res.data.result
 }
+
+onBeforeRouteUpdate((to)=>{
+    getcategroy(to.params.id)
+})
+
+
 
 const bannerList = ref([])
 
