@@ -1,7 +1,17 @@
 import httpInstance from "@/utils/https";
 
-export const getBanner = () => {
-    return httpInstance.get('/home/banner')
+interface BannerParams {
+  distributionSite?: string
+}
+
+export function getBanner(params: BannerParams = {}) {
+  const { distributionSite = '1' } = params
+  return httpInstance({
+    url: '/home/banner',
+    params: {
+      distributionSite
+    }
+  })
 }
 
 /**
@@ -10,9 +20,9 @@ export const getBanner = () => {
  * @return {*}
  */
 export const findNewAPI = () => {
-    return httpInstance({
-        url: '/home/new'
-    })
+  return httpInstance({
+    url: '/home/new'
+  })
 }
 
 /**
