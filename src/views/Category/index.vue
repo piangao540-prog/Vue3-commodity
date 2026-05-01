@@ -11,6 +11,9 @@ const {category} = useCategroy()
 const {bannerList} = useBanner()
 
 
+
+
+
 </script>
 
 <template>
@@ -35,12 +38,14 @@ const {bannerList} = useBanner()
       <div class="sub-list">
         <h3>全部分类</h3>
         <ul>
-          <li v-for="i in category.children" :key="i.id">
-            <RouterLink to="/category/sud/:id">
-              <img :src="i.picture" />
-              <p>{{ i.name }}</p>
-            </RouterLink>
-          </li>
+          <template v-for="i in category.children" :key="i.id">
+            <li v-if="i && i.id">
+              <RouterLink :to="'/category/sub/' + String(i.id)">
+                <img :src="i.picture" />
+                <p>{{ i.name }}</p>
+              </RouterLink>
+            </li>
+          </template>
         </ul>
       </div>
       <div class="ref-goods" v-for="item in category.children" :key="item.id">

@@ -1,19 +1,31 @@
 <script setup>
+import {getCategoryFilterAPI} from "@/apis/categroy"
+import {ref,onMounted} from "vue"
+import {useRoute} from "vue-router"
+const categroyData = ref({})
+const route = useRoute()
+const getCategroy = async () => {
+  const res = await getCategoryFilterAPI( route.params.id)
+  // console.log(res)
+  categroyData.value = res.data.result
+  
+}
 
+onMounted(() =>getCategroy())
 
 </script>
-
+ 
 <template>
-  <div class="container ">
+  <div class="container "> 
     <!-- 面包屑 -->
     <div class="bread-container">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/' }">居家
+        <el-breadcrumb-item :to="{ path: `/category/${categroyData.parentId}` }">{{ categroyData.parentName }}
         </el-breadcrumb-item>
-        <el-breadcrumb-item>居家生活用品</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ categroyData.name }}</el-breadcrumb-item>
       </el-breadcrumb>
-    </div>
+    </div>  
     <div class="sub-container">
       <el-tabs>
         <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
