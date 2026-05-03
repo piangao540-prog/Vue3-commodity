@@ -8,7 +8,7 @@ const route = useRoute()
 const getHotGood = async () =>{
     const res = await fetchHotGoodsAPI({
         id: route.params.id,
-        type: 1
+        type: props.hotType
     })
     hotGood.value = res.data.result
 }
