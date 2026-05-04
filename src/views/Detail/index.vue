@@ -22,14 +22,14 @@ onMounted(()=>{
 
 let skuObj = {}
 const skuChange = (sku)=>{
-  console.log(sku)
+  // console.log(sku)
   skuObj = sku
 }
 // 购物车
 const cartStore = useCartStore()
 const count = ref(1)
 const countChange = (count) =>{
-    console.log(count)
+    // console.log(count)
 }
 const addCart = () =>{
   if(skuObj.skuId){
