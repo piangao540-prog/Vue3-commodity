@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus';
 import 'element-plus/theme-chalk/el-message.css'
-import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user';
 
 const httpInstance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -11,6 +11,11 @@ const httpInstance = axios.create({
 // 添加请求拦截器
 httpInstance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
+    const userStore = useUserStore()
+    const token = (userStore.userInfo as { token?: string }).token
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
     return config;
 }, function (error) {
     // 对请求错误做些什么
