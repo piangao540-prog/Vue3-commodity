@@ -9,4 +9,4 @@ export const useUserStore = defineStore('user', () => {
         userInfo.value = res.data.result
     }
     return { userInfo, getUserInfo }
-})
+}, { persist: true })
