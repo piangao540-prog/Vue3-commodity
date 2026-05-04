@@ -2,6 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus';
 import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from '@/stores/user';
+import router from '@/router';
 
 const httpInstance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -30,10 +31,16 @@ httpInstance.interceptors.response.use(function (response) {
 }, function (error) {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
+    const userStore = useUserStore()
+
     ElMessage({
         type: 'warning',
         message: error.response.data.msg
     })
+    if (error.response.status === 401) {
+        userStore.clearUserInfo()
+        router.push('/login')
+    }
     return Promise.reject(error);
 });
 
