@@ -21,6 +21,7 @@ export const useCartStore = defineStore('cart', () => {
         cartList.value = res.data.result
     }
     const isLogin = computed(() => Boolean((userStore.userInfo as { token?: string }).token))
+    // 购物车商品增加
     const addCart = async (goods: CartItem) => {
         if (isLogin.value) {
             await insertCartApi({ skuId: goods.skuId, count: goods.count })
@@ -37,7 +38,7 @@ export const useCartStore = defineStore('cart', () => {
             }
         }
     }
-
+    // 购物车商品删除
     const delCart = async (skuId: string) => {
         if (isLogin.value) {
             await delCartApi(Array(skuId))
@@ -72,6 +73,7 @@ export const useCartStore = defineStore('cart', () => {
         return cartList.value.every((item) => item.selected)
     })
 
+    // 单选
     const singleCheck = (skuId: string, selected: boolean) => {
         const item = cartList.value.find((item) => item.skuId === skuId)
         if (item) {
@@ -79,5 +81,10 @@ export const useCartStore = defineStore('cart', () => {
         }
     }
 
-    return { cartList, addCart, delCart, isAll, allCount, allPrice, selectedCount, selectedPrice, singleCheck, allCheck }
+    // 清除购物车数据
+    const clearnCart = () => {
+        cartList.value = []
+    }
+
+    return { cartList, addCart, delCart, isAll, allCount, allPrice, selectedCount, selectedPrice, singleCheck, allCheck, clearnCart }
 }, { persist: true })
