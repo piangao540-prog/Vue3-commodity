@@ -2,9 +2,12 @@
 import { useCartStore } from '@/stores/cartStore';
 const cartStore = useCartStore()
 // const cartList = []
-const singleCheck = (i,selected) =>{
-  console.log(i,selected)
-  cartStore.singleCheck(i.skuId,selected)
+const singleCheck = (i, selected) => {
+  cartStore.singleCheck(i.skuId, selected)
+}
+
+const allCheck = (selected) => {
+  cartStore.allCheck(selected)
 }
 </script>
 
@@ -16,7 +19,7 @@ const singleCheck = (i,selected) =>{
           <thead>
             <tr>
               <th width="120">
-                <el-checkbox/>
+                <el-checkbox :model-value="cartStore.isAll" @change="allCheck"/>
               </th>
               <th width="400">商品信息</th>
               <th width="220">单价</th>
@@ -33,7 +36,9 @@ const singleCheck = (i,selected) =>{
               </td>
               <td>
                 <div class="goods">
-                  <RouterLink to="/"><img :src="i.picture" alt="" /></RouterLink>
+                  <RouterLink to="/">
+                    <img :src="i.picture" alt="" @error="$event.target.style.display='none'" />
+                  </RouterLink>
                   <div>
                     <p class="name ellipsis">
                       {{ i.name }}
