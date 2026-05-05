@@ -16,6 +16,7 @@ interface CartItem {
 export const useCartStore = defineStore('cart', () => {
     const cartList = ref<CartItem[]>([])
     const userStore = useUserStore()
+    // 更新购物车
     const updateNewList = async () => {
         const res = await findNewCartApi()
         cartList.value = res.data.result
@@ -86,5 +87,6 @@ export const useCartStore = defineStore('cart', () => {
         cartList.value = []
     }
 
-    return { cartList, addCart, delCart, isAll, allCount, allPrice, selectedCount, selectedPrice, singleCheck, allCheck, clearnCart }
+    return { cartList, addCart, delCart, isAll, allCount, allPrice, selectedCount, selectedPrice, 
+        singleCheck, allCheck, clearnCart,updateNewList }
 }, { persist: true })

@@ -23,4 +23,13 @@ export const delCartApi = (ids: string[]) => {
 
 export const findNewCartApi = () => {
     return httpInstance({ url: '/member/cart' })
-} 
+}
+
+// 合并购物车
+export const mergeCartApi = (data: object) => {
+    return httpInstance({
+        url: '/member/cart/merge',
+        method: 'POST',
+        data
+    })
+}
