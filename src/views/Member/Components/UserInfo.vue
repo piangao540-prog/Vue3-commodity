@@ -7,7 +7,7 @@ const likeList = ref([])
 const userStore = useUserStore()
 const getLikeList = async () =>{
     const res = await getLikeListApi({limit:4})
-    console.log(res)
+    // console.log(res)
     likeList.value = res.data.result
 }
 onMounted(() => getLikeList())

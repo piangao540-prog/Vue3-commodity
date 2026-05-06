@@ -6,7 +6,7 @@ import router from '@/router';
 
 const httpInstance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
-    timeout: 5000
+    timeout: 10000
 })
 
 // 添加请求拦截器
@@ -33,11 +33,20 @@ httpInstance.interceptors.response.use(function (response) {
     // 对响应错误做点什么
     const userStore = useUserStore()
 
+    let errorMessage = '请求失败'
+    if (error.code === 'ECONNABORTED') {
+        errorMessage = '请求超时，请检查网络连接'
+    } else if (!error.response) {
+        errorMessage = '网络错误，请检查网络连接'
+    } else {
+        errorMessage = error.response?.data?.msg || error.message
+    }
+
     ElMessage({
         type: 'warning',
-        message: error.response?.data?.msg || error.message || '请求失败'
+        message: errorMessage
     })
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
         userStore.clearUserInfo()
         router.push('/login')
     }

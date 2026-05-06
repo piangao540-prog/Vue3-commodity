@@ -20,3 +20,20 @@ export const getLikeListApi = ({ limit = 4 }) => {
         }
     })
 }
+
+
+/*
+params: {
+    orderState:0,
+  page:1,
+  pageSize:2
+}
+*/
+  
+export const getUserOrderApi = (params: object) => {
+    return httpInstance({
+        url: '/member/order',
+        method: 'GET',
+        params
+    })
+}
