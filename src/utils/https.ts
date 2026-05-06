@@ -35,7 +35,7 @@ httpInstance.interceptors.response.use(function (response) {
 
     ElMessage({
         type: 'warning',
-        message: error.response.data.msg
+        message: error.response?.data?.msg || error.message || '请求失败'
     })
     if (error.response.status === 401) {
         userStore.clearUserInfo()
