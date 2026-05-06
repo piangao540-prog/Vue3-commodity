@@ -1,6 +1,18 @@
 <script setup>
-const payInfo = {}
-const payUrl = 'https://qr.alipay.com/fkx1234567890' // 示例支付宝支付链接
+import {ref,onMounted} from 'vue'
+import { getOrderApi } from '@/apis/pay';
+import {useRoute} from 'vue-router'
+const payInfo = ref({})
+const route = useRoute()
+const payUrl = 'https://qr.alipay.com/fkx1234567890' // 支付宝支付链接
+
+const getPayInfo = async () =>{
+    const res = await getOrderApi(route.query.id)
+    payInfo.value = res.data.result
+}
+
+// 组件挂载时获取支付信息
+onMounted(()=>getPayInfo())
 </script>
 
 

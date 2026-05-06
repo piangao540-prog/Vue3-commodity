@@ -52,7 +52,7 @@ const createOrder = async () =>{
     }),
     addressId:curAddress.value.id
   })
-  console.log(res)
+  // console.log(res)
   const orderid = res.data.result.id
   router.push({
     path:'/pay',
