@@ -9,7 +9,7 @@ const loading = ref(false)
 const params = ref({
   orderState: 0,
   page: 1,
-  pageSize: 10 // 增加每页数量，减少请求次数
+  pageSize: 5 // 增加每页数量，减少请求次数
 })
 
 const getUserOrder = async () =>{
