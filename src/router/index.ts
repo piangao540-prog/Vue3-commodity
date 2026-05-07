@@ -9,7 +9,7 @@ import cartList from '@/views/cartList/index.vue'
 import checkout from '@/views/Checkout/index.vue'
 import pay from '@/views/Pay/index.vue'
 import member from '@/views/Member/index.vue'
-import memberInfo from '@/views/Member/Components/Userinfo.vue'
+import memberInfo from '@/views/Member/Components/UserInfo.vue'
 import memberOrder from "@/views/Member/Components/UserOrder.vue"
 
 const router = createRouter({
