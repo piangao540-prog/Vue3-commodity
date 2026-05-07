@@ -1,18 +1,29 @@
 <script setup>
 import { getUserOrderApi } from '@/apis/user';
 import {onMounted, ref} from 'vue'
+import { Loading } from '@element-plus/icons-vue'
 // 订单列表
 const orderList = ref([])
 const total = ref(0)
+const loading = ref(false)
 const params = ref({
   orderState: 0,
   page: 1,
-  pageSize: 2
+  pageSize: 10 // 增加每页数量，减少请求次数
 })
+
 const getUserOrder = async () =>{
-    const res = await getUserOrderApi(params.value)
-    orderList.value = res.data.result.items
-    total.value = res.data.result.counts || 0
+    if (loading.value) return // 防止重复请求
+    loading.value = true
+    try {
+        const res = await getUserOrderApi(params.value)
+        orderList.value = res.data.result.items
+        total.value = res.data.result.counts || 0
+    } catch (error) {
+        console.error('获取订单失败:', error)
+    } finally {
+        loading.value = false
+    }
 }
 
 onMounted(() => getUserOrder())
@@ -26,20 +37,31 @@ const tabTypes = [
   { name: "complete", label: "已完成" },
   { name: "cancel", label: "已取消" }
 ]
-
+// tab切换
+const tabChange = (type) =>{
+  params.value.orderState = type
+  params.value.page = 1 // 切换状态时重置页码
+  getUserOrder()
+}
 
 
 </script>
 
 <template>
   <div class="order-container">
-    <el-tabs>
+    <el-tabs @tab-change="tabChange">
       <!-- tab切换 -->
-      <el-tab-pane v-for="item in tabTypes" :key="item.name" :label="item.label" />
+      <el-tab-pane  v-for="item in tabTypes" :key="item.name" :label="item.label" />
 
       <div class="main-container">
-        <div class="holder-container" v-if="orderList.length === 0">
+        <div class="holder-container" v-if="orderList.length === 0 && !loading">
           <el-empty description="暂无订单数据" />
+        </div>
+        <div class="holder-container" v-if="loading">
+          <div class="loading-spinner">
+            <el-icon class="is-loading"><Loading /></el-icon>
+            加载中...
+          </div>
         </div>
         <div v-else>
           <!-- 订单列表 -->
@@ -144,6 +166,14 @@ const tabTypes = [
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .loading-spinner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #909399;
+      font-size: 14px;
     }
   }
 }

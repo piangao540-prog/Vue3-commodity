@@ -6,7 +6,7 @@ import router from '@/router';
 
 const httpInstance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
-    timeout: 10000
+    timeout: 30000
 })
 
 // 添加请求拦截器
