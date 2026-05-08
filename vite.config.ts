@@ -9,7 +9,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './', // 添加这一行，用于 GitHub Pages
+  base: '/Vue3-commodity/', // 修改为你的仓库名称，用于 GitHub Pages
   plugins: [
     vue(),
     vueDevTools(),
