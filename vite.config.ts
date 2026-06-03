@@ -10,6 +10,15 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vite.dev/config/
 export default defineConfig({
   base: '/Vue3-commodity/', // 修改为你的仓库名称，用于 GitHub Pages
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  },
   plugins: [
     vue(),
     vueDevTools(),
